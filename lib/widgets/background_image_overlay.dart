@@ -11,15 +11,16 @@ class BackgroundImageOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints.expand(),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         image: DecorationImage(
-            opacity: 0.075,
+            opacity: 0.1,
             image: AssetImage(
               "assets/images/pattern.png",
             ),
             fit: BoxFit.cover),
       ),
+      child: widget,
     );
   }
 }
