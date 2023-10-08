@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:news_app/screens/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,10 +18,15 @@ class NewsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'News App',
       theme: ThemeData(
         useMaterial3: true,
       ),
+      initialRoute: HomeScreen.routeName,
+      routes: {
+        HomeScreen.routeName: (context) => const HomeScreen(),
+      },
     );
   }
 }
