@@ -9,11 +9,11 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        HomeAppBar(),
+        const HomeAppBar(),
         SizedBox(
           height: 24.h,
         ),
-        NewsAgenciesTabs(),
+        const Expanded(child: NewsAgenciesTabs()),
       ],
     );
   }

@@ -28,6 +28,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  intl: ^0.18.1
+  transparent_image: ^2.0.1
   loading_animation_widget: ^1.2.0+4
   flutter_screenutil: ^5.9.0
   flutter_native_splash: ^2.3.3

@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BackgroundImageOverlay(
+    return const BackgroundImageOverlay(
       widget: Scaffold(
         body: HomeBody(),
       ),

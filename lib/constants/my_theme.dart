@@ -13,6 +13,16 @@ class MyTheme {
         fontWeight: FontWeight.w400,
         fontSize: 14.sp,
       ),
+      titleSmall: TextStyle(
+        fontSize: 14.sp,
+        color: MyColors.greyColor,
+        fontWeight: FontWeight.w400,
+      ),
+      titleMedium: TextStyle(
+        fontSize: 16.sp,
+        color: MyColors.darkColor,
+        fontWeight: FontWeight.w500,
+      ),
     ),
   );
 }

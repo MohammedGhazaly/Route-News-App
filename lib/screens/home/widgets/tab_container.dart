@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/models/sources_response.dart';
 import 'package:news_app/screens/home/widgets/tab_item.dart';
+import 'package:news_app/services/api_services.dart';
+import 'package:news_app/widgets/news_articles_list_view.dart';
 
 class TabContainer extends StatefulWidget {
   final List<Source> newsSources;
@@ -32,6 +35,16 @@ class _TabContainerState extends State<TabContainer> {
                   isSelected:
                       selectedIndex == widget.newsSources.indexOf(source));
             }).toList(),
+          ),
+          SizedBox(
+            height: 24.h,
+          ),
+          Expanded(
+            child: NewsArticlesListView(
+              apiServiceMethod: ApiServices.getNewsBySourceId(
+                sourceId: widget.newsSources[selectedIndex].id!,
+              ),
+            ),
           )
         ],
       ),

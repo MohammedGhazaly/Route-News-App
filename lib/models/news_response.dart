@@ -3,21 +3,27 @@ class NewsResponse {
     this.status,
     this.totalResults,
     this.articles,
+    this.code,
+    this.message,
   });
 
   NewsResponse.fromJson(dynamic json) {
     status = json['status'];
+    code = json['status'];
+    message = json['status'];
     totalResults = json['totalResults'];
     if (json['articles'] != null) {
       articles = [];
       json['articles'].forEach((v) {
-        articles?.add(Articles.fromJson(v));
+        articles?.add(Article.fromJson(v));
       });
     }
   }
   String? status;
   int? totalResults;
-  List<Articles>? articles;
+  String? code;
+  String? message;
+  List<Article>? articles;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -30,8 +36,8 @@ class NewsResponse {
   }
 }
 
-class Articles {
-  Articles({
+class Article {
+  Article({
     this.source,
     this.author,
     this.title,
@@ -42,7 +48,7 @@ class Articles {
     this.content,
   });
 
-  Articles.fromJson(dynamic json) {
+  Article.fromJson(dynamic json) {
     source =
         json['source'] != null ? NewsSource.fromJson(json['source']) : null;
     author = json['author'];
