@@ -17,6 +17,7 @@ class ApiServices {
 
       return responseData;
     } on Exception catch (e) {
+      print("asdasd ${e}");
       throw e;
     }
   }

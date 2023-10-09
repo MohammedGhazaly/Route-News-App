@@ -4,16 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/constants/colors.dart';
 import 'package:news_app/constants/size_config.dart';
 
-class CustomAppBar extends StatefulWidget {
-  const CustomAppBar({
+class HomeAppBar extends StatefulWidget {
+  const HomeAppBar({
     super.key,
   });
 
   @override
-  State<CustomAppBar> createState() => _CustomAppBarState();
+  State<HomeAppBar> createState() => _HomeAppBarState();
 }
 
-class _CustomAppBarState extends State<CustomAppBar> {
+class _HomeAppBarState extends State<HomeAppBar> {
   TextEditingController textEditingController = TextEditingController();
 
   @override
@@ -41,22 +41,15 @@ class _CustomAppBarState extends State<CustomAppBar> {
               size: 36,
             ),
           ),
-          AnimSearchBar(
-            boxShadow: false,
-            color: Colors.transparent,
-            helpText: "Search article",
-            searchIconColor: MyColors.whiteColor,
-            prefixIcon: Icon(
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
               Icons.search,
               color: MyColors.whiteColor,
               shadows: null,
               size: 36,
             ),
-            width: SizeConfig.screenWidth * 0.75,
-            textController: textEditingController,
-            onSuffixTap: () {},
-            onSubmitted: (value) {},
-          ),
+          )
         ],
       ),
       // child: Row(),

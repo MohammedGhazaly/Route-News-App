@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/widgets/custom_app_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news_app/screens/home/widgets/news_agencies_tabs.dart';
+import 'package:news_app/screens/home/widgets/home_custom_app_bar.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -7,7 +9,11 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomAppBar(),
+        HomeAppBar(),
+        SizedBox(
+          height: 24.h,
+        ),
+        NewsAgenciesTabs(),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/constants/colors.dart';
 
 class MyTheme {
@@ -6,6 +7,12 @@ class MyTheme {
     useMaterial3: true,
     scaffoldBackgroundColor: Colors.transparent,
     primaryColor: MyColors.primaryColor,
-    textTheme: TextTheme(),
+    fontFamily: "Poppins",
+    textTheme: TextTheme(
+      labelSmall: TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 14.sp,
+      ),
+    ),
   );
 }
