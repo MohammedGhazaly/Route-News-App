@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/constants/colors.dart';
 
 class NotOkayStatus extends StatelessWidget {
@@ -19,7 +20,7 @@ class NotOkayStatus extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             color: MyColors.blackColor,
-            fontSize: 32,
+            fontSize: 24.sp,
           ),
         ),
       ],
