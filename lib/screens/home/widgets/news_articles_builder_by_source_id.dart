@@ -4,19 +4,21 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:news_app/constants/colors.dart';
 import 'package:news_app/models/news_response.dart';
 import 'package:news_app/screens/article_details/article_details_screen.dart';
+import 'package:news_app/screens/home/widgets/list_view_source_articles.dart';
+import 'package:news_app/services/api_services.dart';
 import 'package:news_app/widgets/empty_articles_message.dart';
 import 'package:news_app/widgets/news_article_item.dart';
 import 'package:news_app/widgets/not_okay_status.dart';
 
-class NewsArticlesSourcesBuilder extends StatelessWidget {
-  final Future<NewsResponse>? apiServiceMethod;
-  const NewsArticlesSourcesBuilder({super.key, required this.apiServiceMethod});
+class NewsArticlesBuilderBySourceId extends StatelessWidget {
+  final String sourceId;
+  const NewsArticlesBuilderBySourceId({super.key, required this.sourceId});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<NewsResponse>(
       // future: ApiServices.getNewsBySourceId(sourceId: source!.id!),
-      future: apiServiceMethod,
+      future: ApiServices.getNewsBySourceId(sourceId: sourceId),
       builder: ((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Column(
@@ -41,22 +43,8 @@ class NewsArticlesSourcesBuilder extends StatelessWidget {
         if (snapshot.data?.articles?.isEmpty ?? [].isEmpty) {
           return const EmptyArticlesMessage();
         }
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25.w),
-          child: ListView.builder(
-            itemCount: snapshot.data!.articles!.length,
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, ArticleDetailsScreen.routeName,
-                      arguments: snapshot.data?.articles?[index] ?? Article());
-                },
-                child: NewsArticleItem(
-                  artilce: snapshot.data?.articles?[index] ?? Article(),
-                ),
-              );
-            },
-          ),
+        return ListViewSourceArticles(
+          articles: snapshot.data!.articles ?? [],
         );
       }),
     );

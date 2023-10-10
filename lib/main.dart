@@ -5,6 +5,7 @@ import 'package:news_app/constants/my_theme.dart';
 import 'package:news_app/constants/size_config.dart';
 import 'package:news_app/screens/article_details/article_details_screen.dart';
 import 'package:news_app/screens/home/home_screen.dart';
+import 'package:news_app/screens/search/search_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +35,7 @@ class NewsApp extends StatelessWidget {
             HomeScreen.routeName: (context) => const HomeScreen(),
             ArticleDetailsScreen.routeName: (context) =>
                 const ArticleDetailsScreen(),
+            SearchScreen.routeName: (context) => const SearchScreen()
           },
         );
       },

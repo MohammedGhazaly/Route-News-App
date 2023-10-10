@@ -1,8 +1,8 @@
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/constants/colors.dart';
 import 'package:news_app/constants/size_config.dart';
+import 'package:news_app/screens/search/search_screen.dart';
 
 class HomeAppBar extends StatefulWidget {
   const HomeAppBar({
@@ -42,7 +42,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, SearchScreen.routeName);
+            },
             icon: Icon(
               Icons.search,
               color: MyColors.whiteColor,

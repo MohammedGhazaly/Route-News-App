@@ -11,10 +11,8 @@ class ArticleDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var articleArgs = ModalRoute.of(context)?.settings.arguments as Article;
     return BackgroundImageOverlay(
-      widget: BackgroundImageOverlay(
-        widget: Scaffold(
-          body: ArticleDetailsBody(article: articleArgs),
-        ),
+      widget: Scaffold(
+        body: ArticleDetailsBody(article: articleArgs),
       ),
     );
   }
