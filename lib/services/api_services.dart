@@ -38,4 +38,21 @@ class ApiServices {
       throw e;
     }
   }
+
+  static Future<NewsResponse> getNewsBySearchQuery(
+      {required String searchQuery}) async {
+    try {
+      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.newsEndpoint, {
+        "apiKey": ApiConstants.apiKey,
+        "q": searchQuery,
+      });
+      var response = await http.get(url);
+      Map<String, dynamic> jsonData = jsonDecode(response.body);
+      NewsResponse responseData = NewsResponse.fromJson(jsonData);
+
+      return responseData;
+    } on Exception catch (e) {
+      throw e;
+    }
+  }
 }

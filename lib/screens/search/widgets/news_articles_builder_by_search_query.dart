@@ -3,20 +3,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:news_app/constants/colors.dart';
 import 'package:news_app/models/news_response.dart';
-import 'package:news_app/screens/home/widgets/list_view_source_articles.dart';
+import 'package:news_app/screens/search/widgets/list_view_search_query_articles.dart';
 import 'package:news_app/services/api_services.dart';
 import 'package:news_app/widgets/empty_articles_message.dart';
 import 'package:news_app/widgets/not_okay_status.dart';
 
-class NewsArticlesBuilderBySourceId extends StatelessWidget {
-  final String sourceId;
-  const NewsArticlesBuilderBySourceId({super.key, required this.sourceId});
+class NewsArticlesBuilderBySearchQuery extends StatelessWidget {
+  final String searchQuery;
+  const NewsArticlesBuilderBySearchQuery(
+      {super.key, required this.searchQuery});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<NewsResponse>(
       // future: ApiServices.getNewsBySourceId(sourceId: source!.id!),
-      future: ApiServices.getNewsBySourceId(sourceId: sourceId),
+      future: ApiServices.getNewsBySearchQuery(searchQuery: searchQuery),
       builder: ((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Column(
@@ -41,7 +42,7 @@ class NewsArticlesBuilderBySourceId extends StatelessWidget {
         if (snapshot.data?.articles?.isEmpty ?? [].isEmpty) {
           return const EmptyArticlesMessage();
         }
-        return ListViewSourceArticles(
+        return ListViewSearchQueryArticles(
           articles: snapshot.data!.articles ?? [],
         );
       }),
