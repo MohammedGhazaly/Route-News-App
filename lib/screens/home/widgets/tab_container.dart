@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/models/sources_response.dart';
 import 'package:news_app/screens/home/widgets/tab_item.dart';
 import 'package:news_app/services/api_services.dart';
-import 'package:news_app/widgets/news_articles_list_view.dart';
+import 'package:news_app/screens/home/widgets/news_articles_sources_builder.dart';
 
 class TabContainer extends StatefulWidget {
   final List<Source> newsSources;
@@ -40,7 +40,7 @@ class _TabContainerState extends State<TabContainer> {
             height: 24.h,
           ),
           Expanded(
-            child: NewsArticlesListView(
+            child: NewsArticlesSourcesBuilder(
               apiServiceMethod: ApiServices.getNewsBySourceId(
                 sourceId: widget.newsSources[selectedIndex].id!,
               ),

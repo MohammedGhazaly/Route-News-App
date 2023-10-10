@@ -3,13 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:news_app/constants/colors.dart';
 import 'package:news_app/models/news_response.dart';
+import 'package:news_app/screens/article_details/article_details_screen.dart';
 import 'package:news_app/widgets/empty_articles_message.dart';
 import 'package:news_app/widgets/news_article_item.dart';
 import 'package:news_app/widgets/not_okay_status.dart';
 
-class NewsArticlesListView extends StatelessWidget {
+class NewsArticlesSourcesBuilder extends StatelessWidget {
   final Future<NewsResponse>? apiServiceMethod;
-  const NewsArticlesListView({super.key, required this.apiServiceMethod});
+  const NewsArticlesSourcesBuilder({super.key, required this.apiServiceMethod});
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +46,14 @@ class NewsArticlesListView extends StatelessWidget {
           child: ListView.builder(
             itemCount: snapshot.data!.articles!.length,
             itemBuilder: (context, index) {
-              return NewsArticleItem(
-                artilce: snapshot.data?.articles?[index] ?? Article(),
+              return InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, ArticleDetailsScreen.routeName,
+                      arguments: snapshot.data?.articles?[index] ?? Article());
+                },
+                child: NewsArticleItem(
+                  artilce: snapshot.data?.articles?[index] ?? Article(),
+                ),
               );
             },
           ),

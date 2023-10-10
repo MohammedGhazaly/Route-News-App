@@ -74,9 +74,9 @@ class NewsArticleItem extends StatelessWidget {
       ],
     );
   }
+}
 
-  String formatDate(String dateString) {
-    DateTime date = DateTime.parse(dateString);
-    return DateFormat.jm().format(date);
-  }
+String formatDate(String dateString) {
+  DateTime date = DateTime.parse(dateString);
+  return DateFormat.jm().format(date);
 }

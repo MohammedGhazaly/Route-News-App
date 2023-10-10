@@ -3,6 +3,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/constants/my_theme.dart';
 import 'package:news_app/constants/size_config.dart';
+import 'package:news_app/screens/article_details/article_details_screen.dart';
 import 'package:news_app/screens/home/home_screen.dart';
 
 void main() async {
@@ -31,6 +32,8 @@ class NewsApp extends StatelessWidget {
           initialRoute: HomeScreen.routeName,
           routes: {
             HomeScreen.routeName: (context) => const HomeScreen(),
+            ArticleDetailsScreen.routeName: (context) =>
+                const ArticleDetailsScreen(),
           },
         );
       },
