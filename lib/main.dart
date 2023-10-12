@@ -35,7 +35,7 @@ class NewsApp extends StatelessWidget {
             HomeScreen.routeName: (context) => const HomeScreen(),
             ArticleDetailsScreen.routeName: (context) =>
                 const ArticleDetailsScreen(),
-            SearchScreen.routeName: (context) => const SearchScreen()
+            SearchScreen.routeName: (context) => const SearchScreen(),
           },
         );
       },

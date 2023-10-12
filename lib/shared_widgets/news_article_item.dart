@@ -5,7 +5,6 @@ import 'package:news_app/constants/colors.dart';
 import 'package:news_app/constants/size_config.dart';
 import 'package:news_app/models/news_response.dart';
 import 'package:news_app/shared_widgets/cached_error_widget.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:intl/intl.dart';
 
 class NewsArticleItem extends StatelessWidget {
@@ -58,8 +57,7 @@ class NewsArticleItem extends StatelessWidget {
           height: 5.h,
         ),
         Text(
-          formatDate(artilce.publishedAt ?? DateTime.now().toString()) ??
-              "No Title Found found",
+          formatDate(artilce.publishedAt ?? DateTime.now().toString()),
           style: Theme.of(context).textTheme.titleSmall,
           textAlign: TextAlign.end,
           overflow: TextOverflow.ellipsis,
