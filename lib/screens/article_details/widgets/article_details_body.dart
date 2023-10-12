@@ -5,12 +5,31 @@ import 'package:news_app/constants/colors.dart';
 import 'package:news_app/constants/size_config.dart';
 import 'package:news_app/models/news_response.dart';
 import 'package:news_app/screens/article_details/widgets/article_details_app_bar.dart';
+import 'package:news_app/screens/webview_article_screen/full_article_screen.dart';
 import 'package:news_app/shared_widgets/cached_error_widget.dart';
 import 'package:news_app/shared_widgets/news_article_item.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
-class ArticleDetailsBody extends StatelessWidget {
+class ArticleDetailsBody extends StatefulWidget {
   final Article article;
   const ArticleDetailsBody({super.key, required this.article});
+
+  @override
+  State<ArticleDetailsBody> createState() => _ArticleDetailsBodyState();
+}
+
+class _ArticleDetailsBodyState extends State<ArticleDetailsBody> {
+  late final WebViewController controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (widget.article.url != null) {
+      controller = WebViewController()
+        ..loadRequest(Uri.parse(widget.article.url!));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +50,7 @@ class ArticleDetailsBody extends StatelessWidget {
                     return const CachedErrorWidget();
                   },
                   // imageUrl: artilce.urlToImage!,
-                  imageUrl: article.urlToImage ?? "",
+                  imageUrl: widget.article.urlToImage ?? "",
                   width: double.infinity,
                   height: SizeConfig.screenHeight * 0.3,
                   fit: BoxFit.cover,
@@ -43,7 +62,7 @@ class ArticleDetailsBody extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  article.author ?? "No author found",
+                  widget.article.author ?? "No author found",
                   style: Theme.of(context).textTheme.titleSmall,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.start,
@@ -55,7 +74,7 @@ class ArticleDetailsBody extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  article.title ?? "No Title Found found",
+                  widget.article.title ?? "No Title Found found",
                   style: Theme.of(context).textTheme.titleMedium,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
@@ -67,7 +86,8 @@ class ArticleDetailsBody extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  formatDate(article.publishedAt ?? DateTime.now().toString()),
+                  formatDate(
+                      widget.article.publishedAt ?? DateTime.now().toString()),
                   style: Theme.of(context).textTheme.titleSmall,
                   textAlign: TextAlign.end,
                   overflow: TextOverflow.ellipsis,
@@ -88,14 +108,30 @@ class ArticleDetailsBody extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      article.content!,
+                      widget.article.content!,
                       style: TextStyle(color: MyColors.darkColor, fontSize: 14),
                     ),
                     const SizedBox(
                       height: 25,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        if (widget.article.url != null) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return FullArticleScreen(
+                              controller: controller,
+                            );
+                          }));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                  "Sorry the url for this article is invalid"),
+                            ),
+                          );
+                        }
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
