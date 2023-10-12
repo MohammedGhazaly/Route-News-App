@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/constants/colors.dart';
 import 'package:news_app/constants/size_config.dart';
 import 'package:news_app/models/news_response.dart';
-import 'package:news_app/screens/home/widgets/home_custom_app_bar.dart';
-import 'package:news_app/widgets/cached_error_widget.dart';
-import 'package:news_app/widgets/news_article_item.dart';
+import 'package:news_app/screens/article_details/widgets/article_details_app_bar.dart';
+import 'package:news_app/shared_widgets/cached_error_widget.dart';
+import 'package:news_app/shared_widgets/news_article_item.dart';
 
 class ArticleDetailsBody extends StatelessWidget {
   final Article article;
@@ -17,27 +17,24 @@ class ArticleDetailsBody extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const HomeAppBar(),
+          const ArticleDetailsAppBar(),
           SizedBox(
             height: 24.h,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Hero(
-                tag: "image",
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: CachedNetworkImage(
-                    errorWidget: (context, url, error) {
-                      return const CachedErrorWidget();
-                    },
-                    // imageUrl: artilce.urlToImage!,
-                    imageUrl: article.urlToImage!,
-                    width: double.infinity,
-                    height: SizeConfig.screenHeight * 0.3,
-                    fit: BoxFit.cover,
-                  ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: CachedNetworkImage(
+                  errorWidget: (context, url, error) {
+                    return const CachedErrorWidget();
+                  },
+                  // imageUrl: artilce.urlToImage!,
+                  imageUrl: article.urlToImage ?? "",
+                  width: double.infinity,
+                  height: SizeConfig.screenHeight * 0.3,
+                  fit: BoxFit.cover,
                 ),
               ),
               SizedBox(

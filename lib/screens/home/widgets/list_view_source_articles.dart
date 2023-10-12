@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/models/news_response.dart';
 import 'package:news_app/screens/article_details/article_details_screen.dart';
-import 'package:news_app/widgets/news_article_item.dart';
+import 'package:news_app/shared_widgets/news_article_item.dart';
 
 class ListViewSourceArticles extends StatefulWidget {
   final List<Article> articles;

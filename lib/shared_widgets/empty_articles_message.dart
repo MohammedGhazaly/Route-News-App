@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/constants/colors.dart';
 
 class EmptyArticlesMessage extends StatelessWidget {
+  final String message;
   const EmptyArticlesMessage({
     super.key,
+    required this.message,
   });
 
   @override
@@ -14,7 +16,7 @@ class EmptyArticlesMessage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "There isn't news matching your search",
+          message,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: MyColors.blackColor,

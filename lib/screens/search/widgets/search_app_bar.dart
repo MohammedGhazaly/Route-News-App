@@ -30,47 +30,62 @@ class _SearchAppBarState extends State<SearchAppBar> {
             bottomRight: Radius.circular(50.w),
           ),
         ),
-        child: TextField(
-          controller: textEditingController,
-          onSubmitted: (value) {
-            widget.onSearchSaved(value);
-          },
-          decoration: InputDecoration(
-            suffixIcon: IconButton(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            IconButton(
               onPressed: () {
-                if (textEditingController.text.trim().isNotEmpty) {
-                  widget.onSearchSaved(textEditingController.text);
-                }
+                Navigator.pop(context);
               },
-              icon: Icon(
-                Icons.search,
-                color: MyColors.primaryColor,
-                size: 36,
+              icon: const Icon(Icons.arrow_back),
+              color: MyColors.whiteColor,
+              iconSize: 32,
+            ),
+            Expanded(
+              child: TextField(
+                controller: textEditingController,
+                onSubmitted: (value) {
+                  widget.onSearchSaved(value);
+                },
+                decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      if (textEditingController.text.trim().isNotEmpty) {
+                        widget.onSearchSaved(textEditingController.text);
+                      }
+                    },
+                    icon: Icon(
+                      Icons.search,
+                      color: MyColors.primaryColor,
+                      size: 36,
+                    ),
+                  ),
+                  prefixIcon: IconButton(
+                      onPressed: () {
+                        textEditingController.clear();
+                      },
+                      icon: Icon(
+                        Icons.cancel,
+                        color: MyColors.primaryColor,
+                      )),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 12,
+                  ),
+                  hintText: "Search article",
+                  hintStyle: Theme.of(context).textTheme.titleSmall,
+                  fillColor: MyColors.whiteColor,
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      borderSide: BorderSide.none),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      borderSide: BorderSide.none),
+                ),
               ),
             ),
-            prefixIcon: IconButton(
-                onPressed: () {
-                  textEditingController.clear();
-                },
-                icon: Icon(
-                  Icons.cancel,
-                  color: MyColors.primaryColor,
-                )),
-            contentPadding: EdgeInsets.symmetric(
-              vertical: 12,
-              horizontal: 12,
-            ),
-            hintText: "Search article",
-            hintStyle: Theme.of(context).textTheme.titleSmall,
-            fillColor: MyColors.whiteColor,
-            filled: true,
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50),
-                borderSide: BorderSide.none),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50),
-                borderSide: BorderSide.none),
-          ),
+          ],
         )
         // child: Row(),
         );

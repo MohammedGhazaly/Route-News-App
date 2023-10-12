@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/constants/colors.dart';
 import 'package:news_app/constants/size_config.dart';
 import 'package:news_app/models/news_response.dart';
-import 'package:news_app/widgets/cached_error_widget.dart';
+import 'package:news_app/shared_widgets/cached_error_widget.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:intl/intl.dart';
 
@@ -24,7 +24,7 @@ class NewsArticleItem extends StatelessWidget {
               return const CachedErrorWidget();
             },
             // imageUrl: artilce.urlToImage!,
-            imageUrl: artilce.urlToImage!,
+            imageUrl: artilce.urlToImage ?? "",
             width: double.infinity,
             height: SizeConfig.screenHeight * 0.25,
             fit: BoxFit.cover,
