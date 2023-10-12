@@ -4,17 +4,12 @@ import 'package:news_app/constants/colors.dart';
 import 'package:news_app/constants/size_config.dart';
 import 'package:news_app/screens/search/search_screen.dart';
 
-class HomeAppBar extends StatefulWidget {
+class HomeAppBar extends StatelessWidget {
+  final void Function()? openDrawer;
   const HomeAppBar({
     super.key,
+    required this.openDrawer,
   });
-
-  @override
-  State<HomeAppBar> createState() => _HomeAppBarState();
-}
-
-class _HomeAppBarState extends State<HomeAppBar> {
-  TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +29,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
         children: [
           IconButton(
             padding: EdgeInsets.zero,
-            onPressed: () {},
+            onPressed: openDrawer,
             icon: Icon(
               Icons.menu,
               color: MyColors.whiteColor,
