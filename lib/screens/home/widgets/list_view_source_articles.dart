@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/models/news_response.dart';
-import 'package:news_app/screens/article_details/article_details_screen.dart';
-import 'package:news_app/shared_widgets/news_article_item.dart';
+import 'package:news_app/services/api_services.dart';
+import 'package:news_app/shared_widgets/list_view_articles.dart';
 
 class ListViewSourceArticles extends StatefulWidget {
   final List<Article> articles;
+  final String sourceId;
+
   const ListViewSourceArticles({
     super.key,
     required this.articles,
+    required this.sourceId,
   });
 
   @override
@@ -16,24 +18,60 @@ class ListViewSourceArticles extends StatefulWidget {
 }
 
 class _ListViewSourceArticlesState extends State<ListViewSourceArticles> {
+  int page = 1;
+  final int limit = 10;
+  bool hasNextPage = true;
+  bool isLoadingMoreData = false;
+  List<Article> posts = [];
+  late ScrollController controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    posts.addAll(widget.articles);
+    super.initState();
+    controller = ScrollController();
+    controller.addListener(() {
+      if (controller.offset == controller.position.maxScrollExtent) {
+        fetchMoreData();
+      }
+    });
+  }
+
+  void fetchMoreData() async {
+    page += 1;
+
+    if (hasNextPage == true && isLoadingMoreData == false) {
+      setState(() {
+        isLoadingMoreData = true;
+      });
+    }
+
+    try {
+      final NewsResponse response = await ApiServices.getNewsBySourceId(
+          page: page, sourceId: widget.sourceId);
+      List<Article> fetchedData = response.articles ?? [];
+
+      if (fetchedData.isNotEmpty) {
+        setState(() {
+          posts.addAll(fetchedData);
+        });
+      } else {
+        setState(() {
+          hasNextPage = false;
+        });
+      }
+    } catch (e) {}
+    setState(() {
+      isLoadingMoreData = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 25.w),
-      child: ListView.builder(
-        itemCount: widget.articles.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, ArticleDetailsScreen.routeName,
-                  arguments: widget.articles[index]);
-            },
-            child: NewsArticleItem(
-              artilce: widget.articles[index],
-            ),
-          );
-        },
-      ),
-    );
+    return ListViewArticles(
+        controller: controller,
+        posts: posts,
+        isLoadingMoreData: isLoadingMoreData);
   }
 }

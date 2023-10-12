@@ -59,6 +59,7 @@ class _NewsArticlesBuilderBySearchQueryState
         }
         return ListViewSearchQueryArticles(
           articles: snapshot.data!.articles ?? [],
+          searchQuery: widget.searchQuery,
         );
       }),
     );

@@ -23,12 +23,17 @@ class ApiServices {
   }
 
   static Future<NewsResponse> getNewsBySourceId(
-      {required String sourceId}) async {
+      {required String sourceId, required int page}) async {
     try {
-      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.newsEndpoint, {
-        "apiKey": ApiConstants.apiKey,
-        "sources": sourceId,
-      });
+      // Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.newsEndpoint, {
+      //   "apiKey": ApiConstants.apiKey,
+      //   "sources": sourceId,
+      //   "pages": 1,
+      //   // "pageSize": ApiConstants.pageSize,
+      // });
+      Uri url = Uri.parse(
+          "https://${ApiConstants.baseUrl}${ApiConstants.newsEndpoint}?sources=$sourceId&pageSize=${ApiConstants.pageSize}&page=$page&apiKey=${ApiConstants.apiKey}");
+      print(url);
       var response = await http.get(url);
       Map<String, dynamic> jsonData = jsonDecode(response.body);
       NewsResponse responseData = NewsResponse.fromJson(jsonData);
@@ -40,12 +45,16 @@ class ApiServices {
   }
 
   static Future<NewsResponse> getNewsBySearchQuery(
-      {required String searchQuery}) async {
+      {required String searchQuery, int page = 1}) async {
     try {
-      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.newsEndpoint, {
-        "apiKey": ApiConstants.apiKey,
-        "q": searchQuery,
-      });
+      // Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.newsEndpoint, {
+      //   "apiKey": ApiConstants.apiKey,
+      //   "q": searchQuery,
+      //   "pageSize": ApiConstants.pageSize,
+      //   "page": page
+      // });
+      Uri url = Uri.parse(
+          "https://${ApiConstants.baseUrl}${ApiConstants.newsEndpoint}?q=$searchQuery&pageSize=${ApiConstants.pageSize}&page=$page&apiKey=${ApiConstants.apiKey}");
       var response = await http.get(url);
       Map<String, dynamic> jsonData = jsonDecode(response.body);
       NewsResponse responseData = NewsResponse.fromJson(jsonData);

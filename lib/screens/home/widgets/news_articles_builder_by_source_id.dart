@@ -23,7 +23,7 @@ class _NewsArticlesBuilderBySourceIdState
   Widget build(BuildContext context) {
     return FutureBuilder<NewsResponse>(
       // future: ApiServices.getNewsBySourceId(sourceId: source!.id!),
-      future: ApiServices.getNewsBySourceId(sourceId: widget.sourceId),
+      future: ApiServices.getNewsBySourceId(sourceId: widget.sourceId, page: 1),
       builder: ((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Column(
@@ -59,6 +59,7 @@ class _NewsArticlesBuilderBySourceIdState
         }
         return ListViewSourceArticles(
           articles: snapshot.data!.articles ?? [],
+          sourceId: widget.sourceId,
         );
       }),
     );
