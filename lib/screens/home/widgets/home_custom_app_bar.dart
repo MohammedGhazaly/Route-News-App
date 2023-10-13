@@ -5,10 +5,12 @@ import 'package:news_app/constants/size_config.dart';
 import 'package:news_app/screens/search/search_screen.dart';
 
 class HomeAppBar extends StatelessWidget {
+  final String selectedCategory;
   final void Function()? openDrawer;
   const HomeAppBar({
     super.key,
     required this.openDrawer,
+    required this.selectedCategory,
   });
 
   @override
@@ -34,6 +36,14 @@ class HomeAppBar extends StatelessWidget {
               Icons.menu,
               color: MyColors.whiteColor,
               size: 36,
+            ),
+          ),
+          Text(
+            selectedCategory,
+            style: TextStyle(
+              color: MyColors.whiteColor,
+              fontWeight: FontWeight.w700,
+              fontSize: 24.sp,
             ),
           ),
           IconButton(

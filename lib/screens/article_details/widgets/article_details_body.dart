@@ -32,6 +32,12 @@ class _ArticleDetailsBodyState extends State<ArticleDetailsBody> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(

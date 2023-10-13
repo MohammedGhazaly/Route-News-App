@@ -5,7 +5,8 @@ import 'package:news_app/models/category_model.dart';
 import 'package:news_app/screens/category/widgets/category_item.dart';
 
 class CategoriesListView extends StatelessWidget {
-  const CategoriesListView({super.key});
+  final void Function(CategoryModel categryId) onCategoryClick;
+  const CategoriesListView({super.key, required this.onCategoryClick});
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +29,14 @@ class CategoriesListView extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisSpacing: 15, mainAxisSpacing: 15, crossAxisCount: 2),
               itemBuilder: (context, index) {
-                return CategoryItem(
-                  category: categories[index],
-                  index: index,
+                return InkWell(
+                  onTap: () {
+                    onCategoryClick(categories[index]);
+                  },
+                  child: CategoryItem(
+                    category: categories[index],
+                    index: index,
+                  ),
                 );
               },
             ),

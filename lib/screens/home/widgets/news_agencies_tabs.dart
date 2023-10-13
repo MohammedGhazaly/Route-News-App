@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:news_app/constants/colors.dart';
+import 'package:news_app/models/category_model.dart';
 import 'package:news_app/models/sources_response.dart';
 import 'package:news_app/screens/home/widgets/tab_container.dart';
 import 'package:news_app/services/api_services.dart';
 import 'package:news_app/shared_widgets/error_column_widget.dart';
 
 class NewsAgenciesTabs extends StatefulWidget {
-  const NewsAgenciesTabs({super.key});
+  final CategoryModel categoryModel;
+  const NewsAgenciesTabs({super.key, required this.categoryModel});
 
   @override
   State<NewsAgenciesTabs> createState() => _NewsAgenciesTabsState();
@@ -18,7 +20,7 @@ class _NewsAgenciesTabsState extends State<NewsAgenciesTabs> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<SourcesResponse>(
-      future: ApiServices.getSources(),
+      future: ApiServices.getSources(widget.categoryModel.id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return LoadingAnimationWidget.twoRotatingArc(

@@ -4,7 +4,11 @@ import 'package:news_app/constants/colors.dart';
 import 'package:news_app/constants/size_config.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key});
+  final Function() onSideMenuClicked;
+  const HomeDrawer({
+    super.key,
+    required this.onSideMenuClicked,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,9 @@ class HomeDrawer extends StatelessWidget {
           height: 30.h,
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            onSideMenuClicked();
+          },
           child: Row(
             children: [
               const SizedBox(
